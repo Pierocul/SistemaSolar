@@ -30,9 +30,23 @@
       box-shadow: 0 0 5px #0004;
       z-index: 999;
     }
+    #leyenda {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 140px; /* puedes ajustar el tamaño si quieres */
+  height: auto;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
   </style>
 </head>
 <body>
+  <!-- Imagen de Leyenda -->
+<img id="leyenda" src="leyenda.png" alt="Leyenda del gráfico">
+
 <svg></svg>
 <div class="tooltip" style="display: none;"></div>
 

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #e4e2dd;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    svg {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .tooltip {
+      position: fixed;
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 4px;
+      font-size: 12px;
+      pointer-events: none;
+      color: #000;
+      box-shadow: 0 0 5px #0004;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+<svg></svg>
+<div class="tooltip" style="display: none;"></div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+const svg = d3.select("svg");
+const tooltip = d3.select(".tooltip");
+const width = window.innerWidth;
+const height = window.innerHeight;
+
+Promise.all([
+  d3.csv("Nodos_mixtos.csv"),
+  d3.csv("Enlaces_mixtos.csv")
+]).then(([nodes, links]) => {
+
+  // Asignar color por área
+  const areaList = [...new Set(nodes.map(d => d.area))];
+  const customColors = ["#53030A", "#9A210E", "#bb3f17", "#DB976F"];
+  const color = d3.scaleOrdinal().domain(areaList).range(customColors);
+
+  // Simulación física
+  const simulation = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(links).id(d => d.id).distance(120).strength(0.03))
+    .force("charge", d3.forceManyBody().strength(-40))
+    .force("center", d3.forceCenter(width / 2, height / 2));
+
+  // Enlaces
+  const link = svg.append("g")
+    .selectAll("line")
+    .data(links)
+    .join("line")
+    .attr("stroke", d => color(d.source.area))
+    .attr("stroke-opacity", 0.2)
+    .attr("stroke-width", 3);
+    
+
+  // Nodos visuales tipo sol
+  const node = svg.append("g")
+    .selectAll("g")
+    .data(nodes)
+    .join("g")
+    .call(drag(simulation))
+    .on("mouseover", (event, d) => {
+      tooltip.style("display", "block").html(`
+        <strong>${d.id}</strong><br>
+        <em>Área:</em> ${d.area}<br>
+        <em>Edad:</em> ${d.edad}<br>
+        <em>Proyectos:</em> ${d.proyectos}<br>
+        <em>Empresas:</em> ${d.empresas}<br>
+        <em>Valor 1:</em> ${d.valor_1}<br>
+        <em>Valor 2:</em> ${d.valor_2}
+      `);
+      link.attr("stroke-opacity", l =>
+        l.source.id === d.id || l.target.id === d.id ? 0.8 : 0.02);
+    })
+    .on("mousemove", (event) => {
+      tooltip
+        .style("left", (event.pageX + 10) + "px")
+        .style("top", (event.pageY - 20) + "px");
+    })
+    .on("mouseout", () => {
+      tooltip.style("display", "none");
+      link.attr("stroke-opacity", 0.1);
+    });
+
+  // Cada nodo como sol
+  node.each(function(d) {
+    const g = d3.select(this);
+    const radius = d.edad ? d.edad / 2 : 20;
+    const nPetalos = +d.proyectos || 0;
+    const nAnillos = +d.empresas || 0;
+    const baseColor = color(d.area);
+
+    // Círculo central
+    g.append("circle")
+      .attr("r", radius)
+      .attr("fill", baseColor)
+      .attr("stroke", "#fff")
+      .attr("stroke-width", 0.5);
+
+    // Anillos interiores
+    for (let i = 1; i <= nAnillos; i++) {
+      g.append("circle")
+        .attr("r", radius * 0.3 + (i * radius * 0.1))
+        .attr("fill", "none")
+        .attr("stroke", "#fff")
+        .attr("stroke-width", 0.6)
+        .attr("stroke-opacity", 0.8);
+    }
+
+    // Triángulos solares (proyectos)
+    for (let i = 0; i < nPetalos; i++) {
+      const angle = (360 / nPetalos) * i;
+      const petalLength = 8;
+      const group = g.append("g").attr("transform", `rotate(${angle}) translate(0, -${radius + 6})`);
+      group.append("path")
+        .attr("d", "M0,0 L4,8 L-4,8 Z")
+        .attr("fill", baseColor)
+        .attr("stroke", "none");
+    }
+  });
+
+  simulation.on("tick", () => {
+    link
+      .attr("x1", d => d.source.x)
+      .attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x)
+      .attr("y2", d => d.target.y);
+
+    node.attr("transform", d => `translate(${d.x},${d.y})`);
+  });
+});
+
+function drag(simulation) {
+  return d3.drag()
+    .on("start", (event, d) => {
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    })
+    .on("drag", (event, d) => {
+      d.fx = event.x;
+      d.fy = event.y;
+    })
+    .on("end", (event, d) => {
+      if (!event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    });
+}
+</script>
+</body>
+</html>

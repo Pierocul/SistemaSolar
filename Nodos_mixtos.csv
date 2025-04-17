@@ -1,0 +1,40 @@
+id,edad,genero,empresas,proyectos,area,valor_1,valor_2
+Matias Duarte,52,Masculino,6,5,UX/UI,Innovación,Experiencia
+Dario Osorio,51,Masculino,5,50,UX/UI,Educación,Cultura
+Ivel  Hernandez ,37,Femenino,3,15,UX/UI,Educación,Arte
+Cruz Contreras,32,Masculino,5,20,UX/UI,Educación,Arte
+Pablo Stanley,34,Masculino,3,5,UX/UI,Democratizacion,Educacion
+Hector Outlet,45,Masculino,5,3,UX/UI,Accesibilidad,Simpicidad
+Fabricio Teixeira,43,Masculino,2,100,UX/UI,Educacion,Comunidad
+Santiago Bustelo,49,Masculino,4,1000,UX/UI,Datos,Profesional
+Sofía Quintero,39,Femenino,3,1,UX/UI,Aprendizaje ,Experiencia
+Ximena Vengoechea,39,Femenino,3,30,UX/UI,Aprendizaje ,Experiencia
+Felix Beltran,84,Masculino,3,500,Diseño Grafico,Cultura,Arte
+Alberto Montt,53,Masculino,10,60,Diseño Grafico,Critica,Humor
+Andrea Torres,46,Femenino,2,50,Diseño Grafico,Tradicion,Arte
+Ximena Ulibarri,51,Femenino,6,40,Diseño Grafico,Critica,Educacion
+Jorge Alderete,52,Masculino,10,300,Diseño Grafico,Cultura,Latino
+Carlos Cadenas,58,Masculino,7,30,Diseño Grafico,Autenticidad ,Arte
+Tite Barbuzza,67,Femenino,9,15,Diseño Grafico,Autenticidad ,Arte
+Osvaldo Zorzano,53,Masculino,3,3,Diseño Grafico,Educación,Innovacion
+Catalina Bustos,36,Femenino,6,4,Diseño Grafico,Emociones,Experiencia
+Alejandro Aravena,56,Masculino,2,20,Diseño Espacios y Objetos,Sostenibilidad,Equidad
+Gonzalo Bascuñan,45,Masculino,7,65,Diseño Espacios y Objetos,Memoria,Educacion
+Abel Carcamo,38,Masculino,5,42,Diseño Espacios y Objetos,Educacion ,Sostenibilidad
+Juskani Alonso,36,Masculino,11,90,Diseño Espacios y Objetos,Cultura,Experimentacion
+David Del Portillo,39,Masculino,9,75,Diseño Espacios y Objetos,Precision,Claridad
+Natalia Criado,39,Femenino,6,35,Diseño Espacios y Objetos,Belleza ,Sostenibilidad
+Luciana Gonzalez,41,Femenino,5,28,Diseño Espacios y Objetos,Sostenibilidad,Arte
+Alejandra Lamelas,34,Femenino,4,25,Diseño Espacios y Objetos,Reutilizacion,Comunidad
+Christian Vivanco,42,Masculino,12,70,Diseño Espacios y Objetos,Cotidianidad,Experiencia
+Ignacia Murtagh,35,Femenino,6,48,Diseño Espacios y Objetos,Materialidad,Experiencia
+Priscilla Huaman,33,Femenino,3,22,Diseño de Moda,Sustentabilidad ,Cultura
+Diego Yañez,40,Masculino,8,65,Diseño de Moda,Memoria ,Activismo
+Gabriela Hearst,47,Femenino,5,35,Diseño de Moda,Sostenibilidad,Cultura
+Kika Vargas,43,Femenino,4,28,Diseño de Moda,Expresion,Autenticidad
+Silvia Tcherassi,58,Femenino,6,60,Diseño de Moda,Elegancia accesible,Empoderamiento Feminino
+Claudio Montaño,27,Masculino,5,10,Diseño de Moda,Autenticidad Visual,Creatividad
+María Cornejo,61,Femenino,4,25,Diseño de Moda,Sostenibilidad,Empoderamiento Feminino
+Lupe Gajardo,35,Femenino,3,10,Diseño de Moda,Identidad local,Educacion
+Antonio Contreras,37,Masculino,5,45,Diseño de Moda,Identidad local,Educacion
+Claudia Anicy,38,Femenino,4,32,Diseño de Moda,Disidencia ,Critica
